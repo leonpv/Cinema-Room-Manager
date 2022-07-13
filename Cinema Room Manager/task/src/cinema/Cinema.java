@@ -1,6 +1,7 @@
 package cinema;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Cinema {
 
@@ -9,8 +10,31 @@ public class Cinema {
         for (String[] strings : grid) {
             Arrays.fill(strings, "S");
         }
-        System.out.println("Cinema:");
-        printBorderedGreed(grid);
+        //System.out.println("Cinema:");
+        //printBorderedGreed(grid);
+        soldStage();
+    }
+
+    private static void soldStage() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the number of rows: ");
+        int firstNumber = scanner.nextInt();
+        System.out.println("Enter the number of seats in each row: ");
+        int secondNumber = scanner.nextInt();
+
+        int totalIncome = 0;
+        int totalSeats = firstNumber * secondNumber;
+        if (totalSeats < 60){
+            totalIncome = totalSeats * 10;
+        } else {
+            if (firstNumber % 2 == 1) {
+                totalIncome = ((firstNumber / 2) * secondNumber * 10) +
+                              ((totalSeats - (firstNumber / 2) * secondNumber) * 8);
+            } else {
+                totalIncome = ((totalSeats / 2) * 10) + ((totalSeats / 2) * 8);
+            }
+        }
+        System.out.printf("Total income:%n$%d", totalIncome);
     }
 
     private static void printBorderedGreed(String[][] grid) {

@@ -1,0 +1,44 @@
+package cinema;
+
+import java.util.Arrays;
+
+public class Cinema {
+
+    public static void main(String[] args) {
+        String[][] grid = new String[7][8];
+        for (String[] strings : grid) {
+            Arrays.fill(strings, "S");
+        }
+        System.out.println("Cinema:");
+        printBorderedGreed(grid);
+    }
+
+    private static void printBorderedGreed(String[][] grid) {
+        String[][] gridBordered = new String[grid.length + 1][grid[0].length + 1];
+        for (int i = 0; i < gridBordered.length; i++) {
+            for (int j = 0; j < gridBordered[i].length; j++) {
+                if (i == 0 && j == 0) {
+                    gridBordered[i][j] = " ";
+                    continue;
+                }
+                if (i == 0) {
+                    gridBordered[i][j] = String.valueOf(j);
+                    continue;
+                }
+                if (j == 0) {
+                    gridBordered[i][j] = String.valueOf(i);
+                    continue;
+                }
+                gridBordered[i][j] = grid[i - 1][j - 1];
+            }
+        }
+        for (int i = 0; i < gridBordered.length; i++) {
+            for (int j = 0; j < gridBordered[i].length; j++) {
+                System.out.print(gridBordered[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+
+}

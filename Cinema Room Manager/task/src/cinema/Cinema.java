@@ -17,7 +17,6 @@ public class Cinema {
             Arrays.fill(strings, "S");
         }
 
-
         int menu = 3;
         while (menu != 0) {
             System.out.println("1. Show the seats\n2. Buy a ticket\n0. Exit");
@@ -34,13 +33,7 @@ public class Cinema {
                     break;
             }
         }
-
-
         //soldStage();
-
-
-        //System.out.println("\nCinema:");
-        //printBorderedGreed(grid);
     }
 
     private static void buyTicket(Scanner scanner, String[][] grid) {

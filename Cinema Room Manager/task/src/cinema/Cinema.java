@@ -17,9 +17,9 @@ public class Cinema {
             Arrays.fill(strings, "S");
         }
 
-        int menu = 3;
+        int menu = 4;
         while (menu != 0) {
-            System.out.println("1. Show the seats\n2. Buy a ticket\n0. Exit");
+            System.out.println("1. Show the seats\n2. Buy a ticket\n3. Statistics\n0. Exit");
             menu = scanner.nextInt();
             switch (menu) {
                 case 1:
@@ -28,12 +28,35 @@ public class Cinema {
                 case 2:
                     buyTicket(scanner, grid);
                     break;
+                case 3:
+                    showStatistics();
+                    break;
                 default:
                     System.out.println("Choose 1, 2 or 0");
                     break;
             }
         }
-        //soldStage();
+
+    }
+
+    private static void showStatistics() {
+        showNumberOfPurchasedTickets(); //todo
+        showPercentage(); //todo
+        showCurrentIncome(); //todo
+        soldStage();
+    }
+
+    private static void showCurrentIncome() {
+        System.out.println("Current income: $" + 0);
+    }
+
+    private static void showPercentage() {
+        System.out.println("Percentage: " + 0.00 + "%");
+    }
+
+    private static void showNumberOfPurchasedTickets() {
+
+        System.out.println("Number of purchased tickets: " + 0);
     }
 
     private static void buyTicket(Scanner scanner, String[][] grid) {
@@ -94,7 +117,7 @@ public class Cinema {
                 totalIncome = ((totalSeats / 2) * 10) + ((totalSeats / 2) * 8);
             }
         }
-        System.out.printf("Total income:%n$%d", totalIncome);
+        System.out.printf("Total income: $%d%n", totalIncome);
     }
 
     private static void printBorderedGreed(String[][] grid) {

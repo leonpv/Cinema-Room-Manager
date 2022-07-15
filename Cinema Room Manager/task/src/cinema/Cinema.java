@@ -1,6 +1,7 @@
 package cinema;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Cinema {
@@ -22,52 +23,78 @@ public class Cinema {
             System.out.println("1. Show the seats\n2. Buy a ticket\n3. Statistics\n0. Exit");
             menu = scanner.nextInt();
             switch (menu) {
-                case 1:
-                    showTheSeats(grid);
-                    break;
-                case 2:
-                    buyTicket(scanner, grid);
-                    break;
-                case 3:
-                    showStatistics();
-                    break;
-                default:
-                    System.out.println("Choose 1, 2 or 0");
-                    break;
+                case 1 -> showTheSeats(grid);
+                case 2 -> buyTicket(scanner, grid);
+                case 3 -> showStatistics(grid);
+                default -> System.out.println("Choose 1, 2 or 0");
+            }
+        }
+    }
+
+    private static void showStatistics(String[][] grid) {
+        System.out.println("Number of purchased tickets: " + numberOfPurchasedTickets(grid));
+        showPercentage(grid);
+        showCurrentIncome(grid);
+        showTotalIncome(grid);
+    }
+
+    private static void showCurrentIncome(String[][] grid) {
+        int currentIncome = 0;
+
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (Objects.equals(grid[i][j], "B")) {
+                    currentIncome += ticketPrice(grid, i + 1, j + 1);
+                }
             }
         }
 
+        System.out.println("Current income: $" + currentIncome);
     }
 
-    private static void showStatistics() {
-        showNumberOfPurchasedTickets(); //todo
-        showPercentage(); //todo
-        showCurrentIncome(); //todo
-        soldStage();
+    private static void showPercentage(String[][] grid) {
+        double totalSeats = grid.length * (grid[grid.length - 1].length);
+        double percentage = (numberOfPurchasedTickets(grid) * 100 / totalSeats);
+        String string = String.format("Percentage: %.2f%%", percentage);
+        System.out.println(string);
     }
 
-    private static void showCurrentIncome() {
-        System.out.println("Current income: $" + 0);
-    }
-
-    private static void showPercentage() {
-        System.out.println("Percentage: " + 0.00 + "%");
-    }
-
-    private static void showNumberOfPurchasedTickets() {
-
-        System.out.println("Number of purchased tickets: " + 0);
+    private static int numberOfPurchasedTickets(String[][] grid) {
+        int numberOfPurchasedTickets = 0;
+        for (String[] strings : grid) {
+            for (String string : strings) {
+                if (Objects.equals(string, "B")) {
+                    numberOfPurchasedTickets++;
+                }
+            }
+        }
+        return numberOfPurchasedTickets;
     }
 
     private static void buyTicket(Scanner scanner, String[][] grid) {
-        System.out.println("\nEnter a row number: ");
-        int row = scanner.nextInt();
-        System.out.println("Enter a seat number in that row: ");
-        int seat = scanner.nextInt();
 
-        printTicketPrice(grid, row, seat);
+        while (true) {
 
-        grid[row - 1][seat - 1] = "B";
+            System.out.println("\nEnter a row number: ");
+            int row = scanner.nextInt();
+            System.out.println("Enter a seat number in that row: ");
+            int seat = scanner.nextInt();
+
+
+            if (row <= 0 || seat < 1 || row > grid.length || seat > grid[row - 1].length) {
+                System.out.println("Wrong input!");
+                continue;
+            }
+            if (Objects.equals(grid[row - 1][seat - 1], "B")) {
+                System.out.println("That ticket has already been purchased!");
+                continue;
+            }
+
+            System.out.printf("%nTicket price: $%d%n", ticketPrice(grid, row, seat));
+            grid[row - 1][seat - 1] = "B";
+            break;
+        }
+
     }
 
     private static void showTheSeats(String[][] grid) {
@@ -75,7 +102,7 @@ public class Cinema {
         printBorderedGreed(grid);
     }
 
-    private static void printTicketPrice(String[][] grid, int row, int seat) {
+    private static int ticketPrice(String[][] grid, int row, int seat) {
         int ticketPrice = 0;
         int totalSeats = grid.length * (grid[grid.length - 1].length);
         if (totalSeats < 60) {
@@ -95,24 +122,21 @@ public class Cinema {
                 }
             }
         }
-        System.out.printf("%nTicket price: $%d", ticketPrice);
+        return ticketPrice;
     }
 
-    private static void soldStage() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the number of rows: ");
-        int firstNumber = scanner.nextInt();
-        System.out.println("Enter the number of seats in each row: ");
-        int secondNumber = scanner.nextInt();
+    private static void showTotalIncome(String[][] grid) {
+        int row = grid.length;
+        int seat = grid[row - 1].length;
 
         int totalIncome = 0;
-        int totalSeats = firstNumber * secondNumber;
+        int totalSeats = row * seat;
         if (totalSeats < 60) {
             totalIncome = totalSeats * 10;
         } else {
-            if (firstNumber % 2 == 1) {
-                totalIncome = ((firstNumber / 2) * secondNumber * 10) +
-                        ((totalSeats - (firstNumber / 2) * secondNumber) * 8);
+            if (row % 2 == 1) {
+                totalIncome = ((row / 2) * seat * 10) +
+                        ((totalSeats - (row / 2) * seat) * 8);
             } else {
                 totalIncome = ((totalSeats / 2) * 10) + ((totalSeats / 2) * 8);
             }

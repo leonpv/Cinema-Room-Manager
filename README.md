@@ -61,9 +61,13 @@ Ticket price: $10
 > 3
 
 Number of purchased tickets: 1
+
 Percentage: 2.78%
+
 Current income: $10
+
 Total income: $360
+
 
 1. Show the seats
 2. Buy a ticket

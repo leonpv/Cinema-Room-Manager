@@ -107,6 +107,7 @@ Ticket price: $10
 > 1
 
 Cinema:
+
     1   2   3   4   5   6
   
 1   B   S   S   S   S   S

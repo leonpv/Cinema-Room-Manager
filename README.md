@@ -33,9 +33,13 @@ Enter the number of seats in each row:
 > 3
 
 Number of purchased tickets: 0
+
 Percentage: 0.00%
+
 Current income: $0
+
 Total income: $360
+
 
 1. Show the seats
 2. Buy a ticket

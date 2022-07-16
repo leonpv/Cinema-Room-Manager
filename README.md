@@ -49,6 +49,7 @@ Total income: $360
 
 Enter a row number:
 > 1
+
 Enter a seat number in that row:
 > 1
 
@@ -77,6 +78,7 @@ Total income: $360
 
 Enter a row number:
 > 1
+
 Enter a seat number in that row:
 > 1
 
@@ -84,6 +86,7 @@ That ticket has already been purchased!
 
 Enter a row number:
 > 10
+
 Enter a seat number in that row:
 > 20
 
@@ -91,6 +94,7 @@ Wrong input!
 
 Enter a row number:
 > 4
+
 Enter a seat number in that row:
 > 4
 

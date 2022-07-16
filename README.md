@@ -108,11 +108,17 @@ Ticket price: $10
 
 Cinema:
   1 2 3 4 5 6
+  
 1 B S S S S S
+
 2 S S S S S S
+
 3 S S S S S S
+
 4 S S S B S S
+
 5 S S S S S S
+
 6 S S S S S S
 
 1. Show the seats
@@ -122,8 +128,11 @@ Cinema:
 > 3
 
 Number of purchased tickets: 2
+
 Percentage: 5.56%
+
 Current income: $20
+
 Total income: $360
 
 1. Show the seats
